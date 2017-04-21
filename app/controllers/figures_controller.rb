@@ -11,6 +11,15 @@ class FiguresController < ApplicationController
 
   post '/figures' do
     @figure = Figure.new(params[:figure])
+
+    params[:figure][:landmark_ids].each do |landmark_id|
+      @figure.add_landmark(Landmark.find(landmark_id))
+    end
+
+    params[:figure][:title_ids].each do |title_id|
+      @figure.add_title(Title.find(title_id))
+    end
+
     @figure.save
     redirect to "figures/#{@figure.id}"
   end
