@@ -12,12 +12,26 @@ class FiguresController < ApplicationController
   post '/figures' do
     @figure = Figure.new(params[:figure])
 
-    params[:figure][:landmark_ids].each do |landmark_id|
-      @figure.add_landmark(Landmark.find(landmark_id))
+    if params[:figure]
+      if params[:figure][:landmark_ids]
+        params[:figure][:landmark_ids].each do |landmark_id|
+          @figure.add_landmark(Landmark.find(landmark_id))
+        end
+      end
+
+      if params[:figure][:title_ids]
+        params[:figure][:title_ids].each do |title_id|
+          @figure.add_title(Title.find(title_id))
+        end
+      end
     end
 
-    params[:figure][:title_ids].each do |title_id|
-      @figure.add_title(Title.find(title_id))
+    if !params[:title].empty?
+      @figure.titles.build(name: params[:title][:name])
+    end
+
+    if !params[:landmark].empty?
+      @figure.landmarks.build(name: params[:landmark][:name])
     end
 
     @figure.save

@@ -10,18 +10,32 @@
   <br>
   <h3>Associated Titles</h3>
   <% Title.all.each do |title| %>
-    <input type='checkbox' name='figure[title_ids][]' 
-          value='<%=title.id%>' id="<%=title.name%>"><%=title.name%></input>
+    <input type='checkbox' name='figure[title_ids][]'
+          value='<%=title.id%>' id="title_<%=title.id%>"><%=title.name%></input>
   <% end %>
+
+  <br>
+  <h3>Enter New Title (optional)</h3>
+  <div>
+    <label for='title_name'>Name:</label>
+    <input type='text' id='table_name' name='title[name]'>
+  </div>
 
   <br>
   <h3>Associated Landmarks</h3>
   <% Landmark.all.each do |landmark| %>
-  <input type='checkbox' name='figure[landmark_ids][]' 
-        value='<%=landmark.id%>' id="<%=landmark.name%>"><%=landmark.name%></input>
+  <input type='checkbox' name='figure[landmark_ids][]'
+        value='<%=landmark.id%>' id="landmark_<%=landmark.id%>"><%=landmark.name%></input>
   <% end %>
-  
+
+  <br>
+  <h3>Enter New Landmark (optional)</h3>
+  <div>
+    <label for='landmark_name'>Name:</label>
+    <input type='text' id='landmark_name' name='landmark[name]'>
+  </div>
+
   <br><br>
   <input type='submit' value='Create New Figure'>
-  
+
 </form>
