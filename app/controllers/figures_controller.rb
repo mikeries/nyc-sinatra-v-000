@@ -10,14 +10,13 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
-
     @figure = Figure.new(params[:figure])
 
-    if !params[:title].empty?
+    if !params[:title][:name].empty?
       @figure.titles.build(name: params[:title][:name])
     end
 
-    if !params[:landmark].empty?
+    if !params[:landmark][:name].empty?
       @figure.landmarks.build(name: params[:landmark][:name])
     end
 
@@ -37,15 +36,13 @@ class FiguresController < ApplicationController
 
   post '/figures/:id' do
     @figure = Figure.find(params[:id])
-
-binding.pry
     @figure.update(params[:figure])
 
-    if !params[:title].empty?
+    if !params[:title][:name].empty?
       @figure.titles.build(name: params[:title][:name])
     end
 
-    if !params[:landmark].empty?
+    if !params[:landmark][:name].empty?
       @figure.landmarks.build(name: params[:landmark][:name])
     end
 
